@@ -14,14 +14,15 @@ import kotlinx.coroutines.flow.update
 
 class GameViewModel: ViewModel()
 {
-    init {
-        resetGame()
-    }
+
     private val _uiState = MutableStateFlow(GameUiState()) // the gameUIState is a data class with a single attribute: currentScrambledWord:String that declared with val:immutable has no setter function : **NOTE** this variable is only accessible in it's own class: GameViewModel
     val uiState: StateFlow<GameUiState> = _uiState.asStateFlow() // this is accessable in other classes : default modifier :public : this variable is used as it can be accessed in other classes. It is a read-only view : that is it can only be read by the UI : GameScreen and not modified
     private lateinit var currentWord: String // gets the current Scramble word
-    private var usedWords:  MutableSet<String> = mutableSetOf()
+    private var usedWords:  MutableSet<String> = mutableSetOf("")
 
+    init {
+        resetGame()
+    }
     var userGuess by mutableStateOf("") // variable for storing user input text
         private set
     private fun shuffleCurrentWord(word: String): String {
@@ -68,9 +69,9 @@ class GameViewModel: ViewModel()
             _uiState.update { currentState ->
                 currentState.copy(isGuessedWrongWrong = true)
             }
-            updateUserGuess((""))
-
         }
+        updateUserGuess((""))
+
     }
 
     private fun updateGameState(updatedScore: Int)
