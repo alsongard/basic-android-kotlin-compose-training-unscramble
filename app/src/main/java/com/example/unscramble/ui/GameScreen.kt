@@ -58,6 +58,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.unscramble.R
 import com.example.unscramble.ui.theme.UnscrambleTheme
+import kotlin.String
 
 @Composable
 fun GameScreen(
@@ -83,13 +84,13 @@ fun GameScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(mediumPadding)
-        ,currentScrambledWord = gameUiState.currentScrambledWord
-        , onUserGuessedChanged =  {gameViewModel.updateUserGuess(it)},
+                .padding(mediumPadding),
+            currentScrambledWord = gameUiState.currentScrambledWord,
+            onUserGuessedChanged =  {gameViewModel.updateUserGuess(it)},
             onKeyboardDone = {gameViewModel.checkUserGuess()},
             userGuess = gameViewModel.userGuess,
-            isGuessWrong = gameUiState.isGuessedWrongWrong
-            , wordCount = gameUiState.currentWordCount
+            isGuessWrong = gameUiState.isGuessedWrongWrong,
+            wordCount = gameUiState.currentWordCount
         )
         // GAME STATUS
         Column(
@@ -147,13 +148,16 @@ fun GameStatus(score: Int, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun GameLayout(modifier: Modifier = Modifier, currentScrambledWord: String,
-               onUserGuessedChanged: (String)->Unit,
-               onKeyboardDone: ()->Unit,
-               userGuess:String,
-               isGuessWrong: Boolean,
-               wordCount: Int
-               ) {
+fun GameLayout(
+    modifier: Modifier = Modifier,
+    currentScrambledWord: String, // variable that holds the current scrambled word
+    onUserGuessedChanged: (String)->Unit, // function passed to: OutlinedText : onValueChange =
+    onKeyboardDone: ()->Unit,
+    userGuess:String, // state from ViewModel that is used on OutlinedText
+    isGuessWrong: Boolean, // state from ViewModal that gives OutlinedText label string 
+    wordCount: Int // variable to display on game count
+)
+{
     val mediumPadding = dimensionResource(R.dimen.padding_medium)
 
     Card(
