@@ -30,6 +30,13 @@ import kotlinx.coroutines.flow.update
 
 /**
  * ViewModel containing the app data and methods to process the data
+ com.example.unscramble
+    |---data package
+    |---ui package
+        |---theme package
+    |---MainActivity.Kt
+
+
  */
 class GameViewModel : ViewModel() {
 
@@ -140,3 +147,22 @@ class GameViewModel : ViewModel() {
         }
     }
 }
+
+/*
+    modifier: Modifier = Modifier,
+    currentScrambledWord: String, // variable that holds the current scrambled word
+    onUserGuessedChanged: (String)->Unit, // function passed to: OutlinedText : onValueChange =
+    onKeyboardDone: ()->Unit,
+    userGuess:String, // state from ViewModel that is used on OutlinedText
+    isGuessWrong: Boolean, // state from ViewModal that gives OutlinedText label string
+    wordCount: Int // variable to display on game count
+
+    onUserGuessChanged = { gameViewModel.updateUserGuess(it) },
+    wordCount = gameUiState.currentWordCount,
+    userGuess = gameViewModel.userGuess,
+    onKeyboardDone = { gameViewModel.checkUserGuess() },
+    currentScrambledWord = gameUiState.currentScrambledWord,
+    isGuessWrong = gameUiState.isGuessedWordWrong,
+
+
+*/
